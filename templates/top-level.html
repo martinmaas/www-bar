@@ -58,10 +58,25 @@
     {% endblock %}
 
     {% block listing %}
-      {% ifndef SHOWON %}
+      {% ifdef POSTDATE %}
         <div class="container theme-showcase" role="main">
+	  <h2> {{ TITLE }} </h2>
+	  {{ POSTDATE }} <br/>
+	  {% ifdef IMAGE %}
+            <img src="images/{{ IMAGE }}" width=60%>
+	  {% endif %}
           {{ CONTENT }}
         </div>
+      {% endif %}
+    {% endblock %}
+
+    {% block listing %}
+      {% if SHOW == STATUS %}
+        <div class="container theme-showcase" role="main">
+          <a href="#{{ LINK }}"><h2> {{ PROJECT }} </h2></a>
+	  <a name="{{ LINK }}"></a>
+          {{ CONTENT }}
+	</div>
       {% endif %}
     {% endblock %}
 
