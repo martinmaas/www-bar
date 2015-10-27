@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# I only support "-o" as the first argument
+if [[ "$1" != "-o" ]]
+then
+	echo "menugen -o <output> <input file>..."
+	exit 1
+fi
+OUTPUT_FILE="$2"
+shift
+shift
+rm -f $OUTPUT_FILE
+touch $OUTPUT_FILE
+
+# Collect the top-level menu entries
+grep -l "^MENU:" $@ | while read markdown
+do
+    html="$(echo "$markdown" | sed 's@pages/\(.*\).md@\1.html@')"
+    menu="$(grep "^MENU:" "$markdown" | cut -d: -f2)"
+
+    cat >>$OUTPUT_FILE <<EOF
+document.write('<li>')
+document.write('  <a href="$html">$menu</a>')
+document.write('</li>')
+EOF
+done

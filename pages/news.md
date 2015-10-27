@@ -1,6 +1,5 @@
+TITLE: UCB-BAR: News
 MENU: News
-SHORTTITLE: UCB-BAR: News
-LONGTITLE: News
-TOP: true
-------
-This is the news!
+SHOWON: news
+-----
+News entries go here, followed by the latest news item.
