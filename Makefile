@@ -7,6 +7,7 @@ INSTALL_DIR ?= a5.millennium.berkeley.edu:/project/eecs/parlab/www/bar/data
 JQUERY_VERSION ?= 1.11.3
 SLICK_VERSION ?= 1.5.7
 BLOGC_VERSION ?= 0.4
+FRONT_NEWS_ENTRIES ?= 5
 
 NEWS_DIR ?= $(SRC_DIR)/news
 JS_DIR ?= $(SRC_DIR)/js
@@ -65,7 +66,7 @@ install:
 # hackery in here to make sure the ordering is correct everywhere. 
 NEWS = $(shell find $(NEWS_DIR) -iname "*.md" | sort --reverse)
 $(BIN_DIR)/news.html: $(NEWS)
-$(BIN_DIR)/index.html: $(wordlist 1,5,$(NEWS))
+$(BIN_DIR)/index.html: $(wordlist 1,$(FRONT_NEWS_ENTRIES),$(NEWS))
 
 PROJECTS = $(shell find $(PROJECT_DIR) -iname "*.md" | sort --reverse)
 HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md")
