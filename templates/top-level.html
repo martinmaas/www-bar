@@ -6,11 +6,16 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Other legacy stuff -->
     <link href="css/hovernav.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-    <link href="theme.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- The front-page carousel -->
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
   </head>
 
   <body role="document" style="font-family: 'Open Sans', sans-serif;">
@@ -46,42 +51,76 @@
       </div>
     </div>
 
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
+    <div class="container theme-showcase" role="main">
+
+    <!-- Shows the front-page image carousel -->
+    {% if SHOW == "index" %}
+      <div class="slider slick">
+    {% endif %}
+
+    {% block listing %}
+      {% if SHOW == "index" %}
+        {% ifdef POSTDATE %}
+          <div class="slick-pane">
+            {{ TITLE }}
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endblock %}
+
+    {% if SHOW == "index" %}
+      </div>
+    {% endif %}
+
+    <!-- Shows the bulk of the content, which is anything with SHOWON set for
+         this page-->
     {% block listing %}
       {% if SHOW == SHOWON %}
-        <div class="container theme-showcase" role="main">
+        <div>
           {{ CONTENT }}
         </div>
       {% endif %}
     {% endblock %}
 
+    <!-- News items, but only when not on index -->
     {% block listing %}
-      {% ifdef POSTDATE %}
-        <div class="container theme-showcase" role="main">
-	  <h2> {{ TITLE }} </h2>
-	  {{ POSTDATE }} <br/>
-	  {% ifdef IMAGE %}
-            <img src="images/{{ IMAGE }}" width=60%>
-	  {% endif %}
-          {{ CONTENT }}
-        </div>
+      {% if SHOW != "index" %}
+        {% ifdef POSTDATE %}
+          <div>
+  	  <h2> {{ TITLE }} </h2>
+  	  {{ POSTDATE }} <br/>
+            {% ifdef IMAGE %}
+              <img src="images/{{ IMAGE }}" width=60%>
+	    {% endif %}
+            {{ CONTENT }}
+          </div>
+        {% endif %}
       {% endif %}
     {% endblock %}
 
+    <!-- Projects/History -->
     {% block listing %}
       {% if SHOW == STATUS %}
-        <div class="container theme-showcase" role="main">
-          <a href="#{{ LINK }}"><h2> {{ PROJECT }} </h2></a>
+        <div>
+          <a href="#{{ LINK }}"><h2>{{ PROJECT }}</h2></a>
 	  <a name="{{ LINK }}"></a>
           {{ CONTENT }}
 	</div>
       {% endif %}
     {% endblock %}
 
+    <!-- Everything appears to need jquery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Legacy stuff from the RISC-V website -->
     <script src="js/showdown.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/hovernav.js"></script>
+
+    <!-- The front-page carousel -->
+    <script type="text/javascript" src="js/slick.min.js"></script>
+    <script type="text/javascript">
+      $('.slick').slick();
+    </script>
   </body>
 </html>

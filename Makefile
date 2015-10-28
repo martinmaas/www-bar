@@ -4,6 +4,9 @@ HDR_DIR ?= templates
 SRC_DIR ?= pages
 INSTALL_DIR ?= a5.millennium.berkeley.edu:/project/eecs/parlab/www/bar/data
 
+JQUERY_VERSION ?= 1.11.3
+SLICK_VERSION ?= 1.5.7
+
 NEWS_DIR ?= $(SRC_DIR)/news
 JS_DIR ?= $(SRC_DIR)/js
 CSS_DIR ?= $(SRC_DIR)/css
@@ -15,6 +18,7 @@ PROJECT_DIR ?= $(SRC_DIR)/projects
 BLOGC ?= $(shell which blogc 2> /dev/null)
 MENUGEN ?= tools/menugen
 RSYNC ?= $(shell which rsync 2> /dev/null)
+WGET ?= $(shell which wget 2> /dev/null)
 
 # The big list of all targets goes in here
 ALL += $(BIN_DIR)/index.html
@@ -25,6 +29,9 @@ ALL += $(BIN_DIR)/publications.html
 ALL += $(BIN_DIR)/about.html
 ALL += $(BIN_DIR)/menu.js
 ALL += $(BIN_DIR)/favicon.ico
+ALL += $(BIN_DIR)/js/jquery.min.js
+ALL += $(BIN_DIR)/js/slick.min.js
+ALL += $(BIN_DIR)/css/slick.css
 ALL += $(patsubst $(CSS_DIR)/%,$(BIN_DIR)/css/%,$(wildcard $(CSS_DIR)/*.css))
 ALL += $(patsubst $(JS_DIR)/%,$(BIN_DIR)/js/%,$(wildcard $(JS_DIR)/*.js))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.png))
@@ -45,6 +52,7 @@ install:
 # hackery in here to make sure the ordering is correct everywhere. 
 NEWS = $(shell find $(NEWS_DIR) -iname "*.md" | sort --reverse)
 $(BIN_DIR)/news.html: $(NEWS)
+$(BIN_DIR)/index.html: $(wordlist 1,5,$(NEWS))
 
 PROJECTS = $(shell find $(PROJECT_DIR) -iname "*.md" | sort --reverse)
 HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md")
@@ -79,3 +87,16 @@ $(BIN_DIR)/images/%: $(IMG_DIR)/%
 $(BIN_DIR)/favicon.ico: $(IMG_DIR)/favicon.ico
 	mkdir -p $(dir $@)
 	cp -L $< $@
+
+# Download javascript from the internet
+$(BIN_DIR)/js/jquery.min.js:
+	mkdir -p $(dir $@)
+	$(WGET) http://code.jquery.com/jquery-$(JQUERY_VERSION).min.js -O $@
+
+$(BIN_DIR)/js/slick.min.js:
+	mkdir -p $(dir $@)
+	$(WGET) http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/slick.min.js -O $@
+
+$(BIN_DIR)/css/slick.css:
+	mkdir -p $(dir $@)
+	$(WGET) http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/slick.css -O $@
