@@ -29,6 +29,7 @@ ALL += $(BIN_DIR)/publications.html
 ALL += $(BIN_DIR)/about.html
 ALL += $(BIN_DIR)/menu.js
 ALL += $(BIN_DIR)/news/menu.js
+ALL += $(BIN_DIR)/projects/menu.js
 ALL += $(BIN_DIR)/favicon.ico
 ALL += $(BIN_DIR)/js/jquery.min.js
 ALL += $(BIN_DIR)/js/slick.min.js
@@ -69,6 +70,10 @@ $(BIN_DIR)/history.html: $(HISTORY)
 # These rules generate pages inside the various sub-directories, and must come
 # before the top-level rule below that is capable of matching them all.
 $(BIN_DIR)/news/%.html: $(SRC_DIR)/news/%.md $(HDR_DIR)/news.html
+	mkdir -p $(dir $@)
+	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
+
+$(BIN_DIR)/projects/%.html: $(SRC_DIR)/projects/%.md $(HDR_DIR)/projects.html
 	mkdir -p $(dir $@)
 	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
 
@@ -131,4 +136,5 @@ LINK_DIRS += $(BIN_DIR)/projects/images
 all: $(LINK_DIRS)
 $(LINK_DIRS):
 	mkdir -p $(dir $@)
+	rm -f $@
 	ln -s ../$(notdir $@) $@
