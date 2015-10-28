@@ -60,7 +60,7 @@ install:
 # hackery in here to make sure the ordering is correct everywhere. 
 NEWS = $(shell find $(NEWS_DIR) -iname "*.md" | sort --reverse)
 $(BIN_DIR)/news.html: $(NEWS)
-$(BIN_DIR)/index.html: $(sort $(wordlist 1,5,$(NEWS)))
+$(BIN_DIR)/index.html: $(wordlist 1,5,$(NEWS))
 
 PROJECTS = $(shell find $(PROJECT_DIR) -iname "*.md" | sort --reverse)
 HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md")
