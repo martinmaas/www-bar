@@ -33,6 +33,34 @@ do
 document.write('<!-- data-toggle="dropdown" -->')
 document.write('<li class="dropdown" id="$id">')
 document.write('  <a href="$PREFIX/$html">$menu</a>')
+EOF
+
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    then
+        cat >>$OUTPUT_FILE <<EOF
+document.write('  <ul class="dropdown-menu" role="menu">')
+EOF
+    fi
+
+    grep -l "^INMENU:$menu" $@ | while read smarkdown
+    do
+        shtml="$(echo "$smarkdown" | sed 's@pages/\(.*\).md@\1.html@')"
+        smenu="$(grep "^SUBMENU:" "$smarkdown" | cut -d: -f2)"
+        sid="$(echo "$smarkdown" | sed 's@pages/\(.*\).md@\1@')"
+
+	cat >>$OUTPUT_FILE <<EOF
+document.write('    <li><a href="$shtml">$smenu</a></li>')
+EOF
+    done
+
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    then
+        cat >>$OUTPUT_FILE <<EOF
+document.write('  </ul>')
+EOF
+    fi
+
+    cat >>$OUTPUT_FILE <<EOF
 document.write('</li>')
 EOF
 done
