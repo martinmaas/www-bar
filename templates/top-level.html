@@ -132,6 +132,14 @@
       </div>
     {% endif %}
 
+    <!-- If we're meant to show the sponsors, do so -->
+    {% block listing %}
+      {% ifdef SPONSORS %}
+        <div class="sponsor-wrapper">
+	  <div class="sponsor-content" style="float: left; width: 75%; overflow: hidden;">
+      {% endif %}
+    {% endblock %}
+
     <!-- Shows the bulk of the content, which is anything with SHOWON set for
          this page-->
     {% block listing %}
@@ -163,6 +171,18 @@
           <a href="projects/{{ PERMALINK }}.html"><h2>{{ PROJECT }}</h2></a>
           {{ CONTENT }}
 	</div>
+      {% endif %}
+    {% endblock %}
+
+    {% block listing %}
+      {% ifdef SPONSORS %}
+        </div>
+	<div class="sponsor-sidebar" style="width: 25%; overflow: hidden;">
+	  <h3>Sponsors</h3>
+	  The sponsor list goes here... <br/>
+	  I have no idea who that is, though...<br/>
+	</div>
+      </div>
       {% endif %}
     {% endblock %}
 
