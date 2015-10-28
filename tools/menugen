@@ -29,10 +29,16 @@ do
     menu="$(grep "^MENU:" "$markdown" | cut -d: -f2)"
     id="$(echo "$markdown" | sed 's@pages/\(.*\).md@\1@')"
 
+    dropdown=""
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    then
+        dropdown=" ▾"
+    fi
+
     cat >>$OUTPUT_FILE <<EOF
 document.write('<!-- data-toggle="dropdown" -->')
 document.write('<li class="dropdown" id="$id">')
-document.write('  <a href="$PREFIX/$html">$menu</a>')
+document.write('  <a href="$PREFIX/$html">$menu$dropdown</a>')
 EOF
 
     if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
