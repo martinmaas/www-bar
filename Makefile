@@ -6,6 +6,7 @@ INSTALL_DIR ?= a5.millennium.berkeley.edu:/project/eecs/parlab/www/bar/data
 
 JQUERY_VERSION ?= 1.11.3
 SLICK_VERSION ?= 1.5.7
+BLOGC_VERSION ?= 0.4
 
 NEWS_DIR ?= $(SRC_DIR)/news
 JS_DIR ?= $(SRC_DIR)/js
@@ -19,6 +20,10 @@ BLOGC ?= $(shell which blogc 2> /dev/null)
 MENUGEN ?= tools/menugen
 RSYNC ?= $(shell which rsync 2> /dev/null)
 WGET ?= $(shell which wget 2> /dev/null)
+
+ifeq (,$(wildcard $(BLOGC)))
+BLOGC = tools/blogc/build/blogc
+endif
 
 # The big list of all targets goes in here
 ALL += $(BIN_DIR)/index.html
@@ -69,17 +74,17 @@ $(BIN_DIR)/history.html: $(HISTORY)
 
 # These rules generate pages inside the various sub-directories, and must come
 # before the top-level rule below that is capable of matching them all.
-$(BIN_DIR)/news/%.html: $(SRC_DIR)/news/%.md $(HDR_DIR)/news.html
+$(BIN_DIR)/news/%.html: $(BLOGC) $(SRC_DIR)/news/%.md $(HDR_DIR)/news.html
 	mkdir -p $(dir $@)
 	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
 
-$(BIN_DIR)/projects/%.html: $(SRC_DIR)/projects/%.md $(HDR_DIR)/projects.html
+$(BIN_DIR)/projects/%.html: $(BLOGC) $(SRC_DIR)/projects/%.md $(HDR_DIR)/projects.html
 	mkdir -p $(dir $@)
 	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
 
 # This rule is used to generate the top-level pages, and must come after all
 # the additional dependencies above.
-$(BIN_DIR)/%.html: $(SRC_DIR)/%.md $(HDR_DIR)/top-level.html 
+$(BIN_DIR)/%.html: $(BLOGC) $(SRC_DIR)/%.md $(HDR_DIR)/top-level.html 
 	mkdir -p $(dir $@)
 	$(BLOGC) -DSHOW=$(patsubst %.html,%,$(notdir $@)) -o $@ -t $(filter %.html,$^) -l $(filter %.md,$^)
 
@@ -138,3 +143,30 @@ $(LINK_DIRS):
 	mkdir -p $(dir $@)
 	rm -f $@
 	ln -s ../$(notdir $@) $@
+
+# Build tools that don't exist on this machine
+tools/blogc/build/blogc: tools/blogc/build/Makefile
+	$(MAKE) -C $(dir $@) $(notdir $@)
+
+tools/blogc/build/Makefile: tools/blogc/configure
+	mkdir -p $(dir $@)
+	cd $(dir $@); ../configure
+
+tools/blogc/configure: tools/blogc/autogen.sh
+	cd $(dir $@) && ./autogen.sh
+
+tools/blogc/autogen.sh: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blogc-*.patch)
+	rm -rf $(dir $@)
+	mkdir -p $(dir $@)
+	tar -C $(dir $@) -xf $(filter %.tar.gz,$^) --strip-components=1
+	cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
+	touch $@
+
+tools/blogc-$(BLOGC_VERSION).tar.gz:
+	$(WGET) https://github.com/blogc/blogc/archive/v0.4.tar.gz -O $@
+
+.PHONY: clean-blogc
+clean: clean-blogc
+clean-blogc:
+	rm -rf tools/blogc-$(BLOGC_VERSION).tar.gz
+	rm -rf tools/blogc

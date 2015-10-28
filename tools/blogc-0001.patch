@@ -1,0 +1,133 @@
+diff --git a/src/renderer.c b/src/renderer.c
+index c5b3e9f..167145d 100644
+--- a/src/renderer.c
++++ b/src/renderer.c
+@@ -215,8 +215,24 @@ blogc_render(b_slist_t *tmpl, b_slist_t *sources, b_trie_t *config, bool listing
+                 }
+                 evaluate = false;
+                 if (stmt->op != 0) {
+-                    if (defined != NULL && stmt->value2 != NULL) {
+-                        cmp = strcmp(defined, stmt->value2);
++                    // Strings that start with a '"' are actually strings, the
++                    // others are meant to be looked up as a second variable
++                    // check.
++                    char *defined2 = NULL;
++                    if (stmt->value2[0] != '"') {
++                        defined2 =
++                            b_strdup(blogc_get_variable(stmt->value2,
++                                                        config,
++                                                        inside_block ? tmp_source
++                                                                     : NULL)
++                            );
++                    } else {
++                        defined2 = b_strndup(stmt->value2 + 1,
++                                             strlen(stmt->value2) - 2);
++                    }
++
++                    if (defined != NULL && defined2 != NULL) {
++                        cmp = strcmp(defined, defined2);
+                         if (cmp != 0 && stmt->op & BLOGC_TEMPLATE_OP_NEQ)
+                             evaluate = true;
+                         else if (cmp == 0 && stmt->op & BLOGC_TEMPLATE_OP_EQ)
+@@ -226,6 +242,8 @@ blogc_render(b_slist_t *tmpl, b_slist_t *sources, b_trie_t *config, bool listing
+                         else if (cmp > 0 && stmt->op & BLOGC_TEMPLATE_OP_GT)
+                             evaluate = true;
+                     }
++
++                    free(defined2);
+                 }
+                 else {
+                     if (if_not && defined == NULL)
+diff --git a/src/template-parser.c b/src/template-parser.c
+index fd01ac2..f6912df 100644
+--- a/src/template-parser.c
++++ b/src/template-parser.c
+@@ -30,7 +30,8 @@ typedef enum {
+     TEMPLATE_BLOCK_IF_OPERATOR_START,
+     TEMPLATE_BLOCK_IF_OPERATOR,
+     TEMPLATE_BLOCK_IF_OPERAND_START,
+-    TEMPLATE_BLOCK_IF_OPERAND,
++    TEMPLATE_BLOCK_IF_STRING_OPERAND,
++    TEMPLATE_BLOCK_IF_VARIABLE_OPERAND,
+     TEMPLATE_BLOCK_END,
+     TEMPLATE_VARIABLE_START,
+     TEMPLATE_VARIABLE,
+@@ -303,6 +304,11 @@ blogc_template_parse(const char *src, size_t src_len, blogc_error_t **err)
+             case TEMPLATE_BLOCK_IF_OPERAND_START:
+                 if (c == ' ')
+                     break;
++                if ((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_') {
++                    state = TEMPLATE_BLOCK_IF_VARIABLE_OPERAND;
++                    start2 = current;
++                    break;
++                }
+                 if (c != '"') {
+                     op_start = 0;
+                     op_end = 0;
+@@ -311,16 +317,23 @@ blogc_template_parse(const char *src, size_t src_len, blogc_error_t **err)
+                         "Invalid 'if' operand. Must be double-quoted static string.");
+                     break;
+                 }
+-                state = TEMPLATE_BLOCK_IF_OPERAND;
+-                start2 = current + 1;
++                state = TEMPLATE_BLOCK_IF_STRING_OPERAND;
++                start2 = current;
+                 break;
+ 
+-            case TEMPLATE_BLOCK_IF_OPERAND:
++            case TEMPLATE_BLOCK_IF_STRING_OPERAND:
+                 if (c != '"')
+                     break;
+                 if (c == '"' && src[current - 1] == '\\')
+                     break;
+                 state = TEMPLATE_BLOCK_END;
++                end2 = current + 1;
++                break;
++
++           case TEMPLATE_BLOCK_IF_VARIABLE_OPERAND:
++                if ((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
++                    break;
++                state = TEMPLATE_BLOCK_END;
+                 end2 = current;
+                 break;
+ 
+@@ -446,7 +459,7 @@ blogc_template_parse(const char *src, size_t src_len, blogc_error_t **err)
+     }
+ 
+     if (*err == NULL) {
+-        if (state == TEMPLATE_BLOCK_IF_OPERAND)
++        if (state == TEMPLATE_BLOCK_IF_STRING_OPERAND)
+             *err = blogc_error_parser(BLOGC_ERROR_TEMPLATE_PARSER, src, src_len,
+                 start2 - 1, "Found an open double-quoted string.");
+         else if (if_count != 0)
+diff --git a/tests/check_template_parser.c b/tests/check_template_parser.c
+index 94f669b..b712f22 100644
+--- a/tests/check_template_parser.c
++++ b/tests/check_template_parser.c
+@@ -106,7 +106,7 @@ test_template_parse(void **state)
+     blogc_assert_template_stmt(tmp->next->next->next->next->next->next->next->next->next,
+         "\n", BLOGC_TEMPLATE_CONTENT_STMT);
+     tmp = tmp->next->next->next->next->next->next->next->next->next->next;
+-    blogc_assert_template_if_stmt(tmp, "BOLA", BLOGC_TEMPLATE_OP_EQ, "1\\\"0");
++    blogc_assert_template_if_stmt(tmp, "BOLA", BLOGC_TEMPLATE_OP_EQ, "\"1\\\"0\"");
+     blogc_assert_template_stmt(tmp->next, "aee", BLOGC_TEMPLATE_CONTENT_STMT);
+     blogc_assert_template_stmt(tmp->next->next, NULL,
+         BLOGC_TEMPLATE_ENDIF_STMT);
+@@ -176,7 +176,7 @@ test_template_parse_crlf(void **state)
+     blogc_assert_template_stmt(tmp->next->next->next->next->next->next->next->next->next,
+         "\r\n", BLOGC_TEMPLATE_CONTENT_STMT);
+     tmp = tmp->next->next->next->next->next->next->next->next->next->next;
+-    blogc_assert_template_if_stmt(tmp, "BOLA", BLOGC_TEMPLATE_OP_EQ, "1\\\"0");
++    blogc_assert_template_if_stmt(tmp, "BOLA", BLOGC_TEMPLATE_OP_EQ, "\"1\\\"0\"");
+     blogc_assert_template_stmt(tmp->next, "aee", BLOGC_TEMPLATE_CONTENT_STMT);
+     blogc_assert_template_stmt(tmp->next->next, NULL,
+         BLOGC_TEMPLATE_ENDIF_STMT);
+@@ -543,7 +543,7 @@ test_template_parse_invalid_if_operand2(void **state)
+     assert_int_equal(err->type, BLOGC_ERROR_TEMPLATE_PARSER);
+     assert_string_equal(err->msg,
+         "Found an open double-quoted string.\n"
+-        "Error occurred near line 1, position 32: "
++        "Error occurred near line 1, position 31: "
+         "{% block entry %}{% if BOLA == \"asd %}");
+     blogc_error_free(err);
+ }
