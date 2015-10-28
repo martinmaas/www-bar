@@ -16,6 +16,7 @@
 
     <!-- The front-page carousel -->
     <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
   </head>
 
   <body role="document" style="font-family: 'Open Sans', sans-serif;">
@@ -55,20 +56,79 @@
 
     <!-- Shows the front-page image carousel -->
     {% if SHOW == "index" %}
-      <div class="slider slick">
+      <style>
+        .front-news {
+	  margin: auto;
+	  width: 75%;
+	}
+	.text-over-image {
+	  position: relative;
+	}
+	.text-over-image-title {
+	  position: absolute;
+	  top: 2%;
+	  left: 2%;
+	  width: 95%;
+	  margin: 0 auto;
+	  font-weight: bold;
+	  font-size: 300%;
+	  color: white;
+          text-shadow:
+	    -1px -1px 0 #000,
+	     1px -1px 0 #000,
+	    -1px 1px 0 #000,
+	     1px 1px 0 #000; 
+	}
+	.text-over-image-blurb {
+          position: absolute;
+          top: 62%;
+          left: 52%;
+          width: 45%;
+          margin: 0 auto;
+          font-weight: bold;
+          font-size: 150%;
+          color: white;
+          text-shadow:
+            -1px -1px 0 #000,
+             1px -1px 0 #000,
+            -1px 1px 0 #000,
+             1px 1px 0 #000;
+	}
+      </style>
+      <div class="slider slick front-news">
     {% endif %}
 
     {% block listing %}
       {% if SHOW == "index" %}
         {% ifdef POSTDATE %}
-          <div class="slick-pane">
-            {{ TITLE }}
+          <div class="slick-pane front-news">
+	    <div class="text-over-image">
+              <div class="text-over-image-title">
+                {{ TITLE }} <br/>
+		<div style="font-size: 75%">{{ POSTDATE }} <br/></div>
+	      </div>
+	      <a href="news/{{ PERMALINK }}.html">
+                <img src="images/{{ IMAGE }}" width=100%>
+	      </a>
+	      <div class="text-over-image-blurb">
+	        {% ifdef BLURB1 %}
+                  {{ BLURB1 }} <br/>
+		{% endif %}
+		{% ifdef BLURB2 %}
+		  {{ BLURB2 }} <br/>
+		{% endif %}
+		{% ifdef BLURB3 %}
+		  {{ BLURB3 }} <br/>
+		{% endif %}
+	      </div>
+	    </div>
           </div>
         {% endif %}
       {% endif %}
     {% endblock %}
 
     {% if SHOW == "index" %}
+      
       </div>
     {% endif %}
 
@@ -87,12 +147,10 @@
       {% if SHOW != "index" %}
         {% ifdef POSTDATE %}
           <div>
-  	  <h2> {{ TITLE }} </h2>
-  	  {{ POSTDATE }} <br/>
-            {% ifdef IMAGE %}
-              <img src="images/{{ IMAGE }}" width=60%>
-	    {% endif %}
-            {{ CONTENT }}
+  	  <a href="news/{{ PERMALINK }}.html">
+	    <h1>{{ TITLE }}: {{ POSTDATE }} </h1>
+	  </a>
+          {{ CONTENT }}
           </div>
         {% endif %}
       {% endif %}
@@ -102,8 +160,7 @@
     {% block listing %}
       {% if SHOW == STATUS %}
         <div>
-          <a href="#{{ LINK }}"><h2>{{ PROJECT }}</h2></a>
-	  <a name="{{ LINK }}"></a>
+          <a href="projects/{{ PERMALINK }}.html"><h2>{{ PROJECT }}</h2></a>
           {{ CONTENT }}
 	</div>
       {% endif %}
@@ -120,7 +177,13 @@
     <!-- The front-page carousel -->
     <script type="text/javascript" src="js/slick.min.js"></script>
     <script type="text/javascript">
-      $('.slick').slick();
+      $('.slick').slick({
+         autoplay: true,
+	 autoplaySpeed: 5000,
+	 infinite: true,
+	 slidesToShow: 1,
+	 slidesToScroll: 1
+      });
     </script>
   </body>
 </html>

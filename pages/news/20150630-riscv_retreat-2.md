@@ -1,6 +1,7 @@
-TITLE: Thanks to everyone for a successful 2nd RISC-V Workshop!
+TITLE: 2nd RISC-V Workshop
 POSTDATE: June 30, 2015
 IMAGE: 20150630-riscv_retreat-2.jpeg
+PERMALINK: 20150630-riscv_retreat-2
 ------
 We’ve just concluded the 2nd RISC-V workshop at the International House in
 Berkeley, CA. Most of the slides are up on the website already, and the videos

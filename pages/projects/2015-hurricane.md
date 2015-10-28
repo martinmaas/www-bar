@@ -1,5 +1,5 @@
 PROJECT: Hurricane
 STATUS: projects
-LINK: 2015-hurricane
+PERMALINK: 2015-hurricane
 ------
 Hurricane DSP fabric
