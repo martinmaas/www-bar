@@ -3,7 +3,7 @@ BAR Website
 This repository contains the sources for the BAR website.  To build the
 website, just type "make".  This will fetch the relevant code from the internet
 and build a copy of the website in "output/".  The website is built using
-[[http://blogc.org]], which converts a markdown-like language to HTML by
+[blogc](http://blogc.org), which converts a markdown-like language to HTML by
 filling out a HTML-like template.
 
 During normal use, you shouldn't need to modify any of the HTML templates, and
