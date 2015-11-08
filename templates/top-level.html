@@ -177,6 +177,8 @@
     {% block listing %}
       {% ifdef NAME %}
         <h1><a href="people/{{ PERMALINK }}.html">{{ NAME }}</a></h1>
+	Advisors: {{ ADVISOR }}<br/>
+	Website: <a href="{{ WEBSITE }}">{{ WEBSITE }}</a><br/>
 	{{ CONTENT }}
       {% endif %}
     {% endblock %}
