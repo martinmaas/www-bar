@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block entry %}UCB-BAR News: {{ TITLE }}{% endblock %}</title>
+    <title>{% block entry %}UCB-BAR Publication: {{ TITLE }}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -50,7 +50,10 @@
 
     <div class="container theme-showcase" role="main">
       {% block entry %}
-        <h1>{{ TITLE }}: {{ POSTDATE }}</h1>
+        <h1>{{ TITLE }}</h1>
+	Authors: {{ AUTHOR }}<br/>
+	Date: {{ PUBDATE }}<br/>
+	Conference: {{ CONFERENCE}}, {{ LOCATION }}<br/>
         {{ CONTENT }}
       {% endblock %}
     </div>
