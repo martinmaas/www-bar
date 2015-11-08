@@ -112,7 +112,22 @@ following keys should be defined:
 
 # People List
 
-TODO: I don't know how to do this yet.
+Like everything else, people entries are alphabetically sorted .md files (this
+time in pages/people).  Each .md file generates an entry in the people list, as
+well a HTML file cooresponding to that person.  Entries in the people list need
+to have the following keys defined in order to produce sane output:
+
+* NAME: The person's name, as you want it to appear when formatted.  This name
+  must match one of the comma-seperated entries in the publication list if you
+  want cross-linking to eventually work.
+
+* WEBSITE: This user's personal website, listed for more information.
+
+* PROJECTS: A comma-seperated list of projects this person is involved in.
+
+In addition to these items, a short (paragraph or so) description of each
+person should be provided.  I just copied the first bit from my personal
+website, and linked to that.
 
 # Top-Level Pages
 
