@@ -14,6 +14,8 @@ JS_DIR ?= $(SRC_DIR)/js
 CSS_DIR ?= $(SRC_DIR)/css
 IMG_DIR ?= $(SRC_DIR)/images
 PROJECT_DIR ?= $(SRC_DIR)/projects
+PUBS_DIR ?= $(SRC_DIR)/publications
+PEOPLE_DIR ?= $(SRC_DIR)/people
 
 # These programs are needed to build the website, if you don't have them then
 # some will be built automatically, some won't.
@@ -36,6 +38,8 @@ ALL += $(BIN_DIR)/people.html
 ALL += $(BIN_DIR)/menu.js
 ALL += $(BIN_DIR)/news/menu.js
 ALL += $(BIN_DIR)/projects/menu.js
+ALL += $(BIN_DIR)/publications/menu.js
+ALL += $(BIN_DIR)/people/menu.js
 ALL += $(BIN_DIR)/favicon.ico
 ALL += $(BIN_DIR)/js/jquery.min.js
 ALL += $(BIN_DIR)/js/slick.min.js
@@ -46,6 +50,8 @@ ALL += $(BIN_DIR)/fonts/slick.ttf
 ALL += $(BIN_DIR)/fonts/slick.svg
 ALL += $(patsubst $(NEWS_DIR)/%.md,$(BIN_DIR)/news/%.html,$(wildcard $(NEWS_DIR)/*.md))
 ALL += $(patsubst $(PROJECT_DIR)/%.md,$(BIN_DIR)/projects/%.html,$(wildcard $(PROJECT_DIR)/*.md))
+ALL += $(patsubst $(PUBS_DIR)/%.md,$(BIN_DIR)/publications/%.html,$(wildcard $(PUBS_DIR)/*.md))
+ALL += $(patsubst $(PEOPLE_DIR)/%.md,$(BIN_DIR)/people/%.html,$(wildcard $(PEOPLE_DIR)/*.md))
 ALL += $(patsubst $(CSS_DIR)/%,$(BIN_DIR)/css/%,$(wildcard $(CSS_DIR)/*.css))
 ALL += $(patsubst $(JS_DIR)/%,$(BIN_DIR)/js/%,$(wildcard $(JS_DIR)/*.js))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.png))
@@ -58,7 +64,7 @@ clean:
 	rm -rf $(BIN_DIR)
 
 .PHONY: install
-install:
+install: all
 	$(RSYNC) -av --delete $(BIN_DIR)/ $(INSTALL_DIR)/
 
 # The additional dependencies that are added to some files, which results in
@@ -73,6 +79,12 @@ HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md")
 $(BIN_DIR)/projects.html: $(PROJECTS)
 $(BIN_DIR)/history.html: $(HISTORY)
 
+PUBLICATIONS = $(shell find $(PUBS_DIR) -iname "*.md" | sort --reverse)
+$(BIN_DIR)/publications.html: $(PUBLICATIONS)
+
+PEOPLE = $(shell find $(PEOPLE_DIR) -iname "*.md" | sort)
+$(BIN_DIR)/people.html: $(PEOPLE)
+
 # These rules generate pages inside the various sub-directories, and must come
 # before the top-level rule below that is capable of matching them all.
 $(BIN_DIR)/news/%.html: $(BLOGC) $(SRC_DIR)/news/%.md $(HDR_DIR)/news.html
@@ -80,6 +92,14 @@ $(BIN_DIR)/news/%.html: $(BLOGC) $(SRC_DIR)/news/%.md $(HDR_DIR)/news.html
 	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
 
 $(BIN_DIR)/projects/%.html: $(BLOGC) $(SRC_DIR)/projects/%.md $(HDR_DIR)/projects.html
+	mkdir -p $(dir $@)
+	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
+
+$(BIN_DIR)/publications/%.html: $(BLOGC) $(SRC_DIR)/publications/%.md $(HDR_DIR)/publications.html
+	mkdir -p $(dir $@)
+	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
+
+$(BIN_DIR)/people/%.html: $(BLOGC) $(SRC_DIR)/people/%.md $(HDR_DIR)/people.html
 	mkdir -p $(dir $@)
 	$(BLOGC) -o $@ -t $(filter %.html,$^) $(filter %.md,$^)
 
@@ -139,6 +159,12 @@ LINK_DIRS += $(BIN_DIR)/news/images
 LINK_DIRS += $(BIN_DIR)/projects/css
 LINK_DIRS += $(BIN_DIR)/projects/js
 LINK_DIRS += $(BIN_DIR)/projects/images
+LINK_DIRS += $(BIN_DIR)/publications/css
+LINK_DIRS += $(BIN_DIR)/publications/js
+LINK_DIRS += $(BIN_DIR)/publications/images
+LINK_DIRS += $(BIN_DIR)/people/css
+LINK_DIRS += $(BIN_DIR)/people/js
+LINK_DIRS += $(BIN_DIR)/people/images
 all: $(LINK_DIRS)
 $(LINK_DIRS):
 	mkdir -p $(dir $@)

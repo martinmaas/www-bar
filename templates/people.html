@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block entry %}UCB-BAR: {{ NAME }}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Other legacy stuff -->
+    <link href="css/hovernav.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href="css/theme.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </head>
+
+  <body role="document" style="font-family: 'Open Sans', sans-serif;">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle"
+                  data-target=".navbar-collapse"
+                  data-toggle="collapse"
+                  type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand"
+             href="../index.html"
+             style="font-weight: bold;">
+            <img class="mainlogo"
+                 src="images/logo.png"
+                 style="margin-top: -10px; padding-top: -10px;"/>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+	    <!-- The menu is kind of odd: I wanted a second file to get
+		 generated (to avoid needing to include every single file
+		 inside every top-level HTML file, which would require lots of
+                 ifdef's) but I can only do that with javascript :(. -->
+            <script src="menu.js"></script>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+      {% block entry %}
+        <h1>{{ NAME }}</h1>
+        {{ CONTENT }}
+      {% endblock %}
+    </div>
+
+    <!-- Everything appears to need jquery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Legacy stuff from the RISC-V website -->
+    <script src="js/showdown.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/hovernav.js"></script>
+  </body>
+</html>

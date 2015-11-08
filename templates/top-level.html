@@ -173,6 +173,30 @@
       {% endif %}
     {% endblock %}
 
+    <!-- People -->
+    {% block listing %}
+      {% ifdef NAME %}
+        <h1><a href="people/{{ PERMALINK }}.html">{{ NAME }}</a></h1>
+	{{ CONTENT }}
+      {% endif %}
+    {% endblock %}
+
+    <!-- Publications -->
+    {% block listing %}
+      {% ifdef PUBDATE %}
+        <div>
+	 <a href="publications/{{ PERMALINK }}.html">
+	   <h1>{{ TITLE }}</h1>
+	 </a>
+	 Title: {{ TITLE }}<br/>
+	 Authors: {{ AUTHOR }}<br/>
+	 Date: {{ PUBDATE }}<br/>
+	 Conference: {{ CONFERENCE }}, {{ LOCATION }}<br/>
+	 {{ CONTENT }}
+	</div>
+      {% endif %}
+    {% endblock %}
+
     {% block listing %}
       {% ifdef SPONSORS %}
         </div>
