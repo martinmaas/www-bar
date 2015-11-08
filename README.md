@@ -89,7 +89,26 @@ either "Projects" or "History", it makes sense to add a INMENU/SUBMENU pair.
 
 # Publications List
 
-TODO: I don't know how to do this yet.
+Like everything else, publication entries are alphabetically sorted .md files
+(this time in pages/publications).  Each .md file generates an entry in the
+publications list, as well as a HTML file cooresponding to that publication.
+
+Publication entries need to have the following keys defined in order to produce
+sane output:
+
+* TITLE: The publication title.
+
+* AUTHOR: The author list, comma seperated.
+
+* PUBDATE: The date of publication.
+
+* PERMALINK: The name of the .md file, used for some linking steps.
+
+Additionally, depending on the sort of publication that's being entered, the
+following keys should be defined:
+
+* CONFERENCE, LOCATION: The name and location of the conference this appeared
+  in.
 
 # People List
 
