@@ -190,7 +190,7 @@ tools/blogc/autogen.sh: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blo
 	touch $@
 
 tools/blogc-$(BLOGC_VERSION).tar.gz:
-	$(WGET) https://github.com/blogc/blogc/archive/v0.4.tar.gz -O $@
+	$(WGET) https://github.com/blogc/blogc/archive/v$(BLOGC_VERSION).tar.gz -O $@
 
 .PHONY: clean-blogc
 clean: clean-blogc
