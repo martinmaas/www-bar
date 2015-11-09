@@ -6,7 +6,7 @@ INSTALL_DIR ?= a5.millennium.berkeley.edu:/project/eecs/parlab/www/bar/data
 
 JQUERY_VERSION ?= 1.11.3
 SLICK_VERSION ?= 1.5.7
-BLOGC_VERSION ?= 0.4
+BLOGC_VERSION ?= 0.5
 FRONT_NEWS_ENTRIES ?= 5
 
 NEWS_DIR ?= $(SRC_DIR)/news
@@ -186,7 +186,7 @@ tools/blogc/autogen.sh: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blo
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
 	tar -C $(dir $@) -xf $(filter %.tar.gz,$^) --strip-components=1
-	cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
+	#cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
 	touch $@
 
 tools/blogc-$(BLOGC_VERSION).tar.gz:
