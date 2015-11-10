@@ -10,10 +10,11 @@ During normal use, you shouldn't need to modify any of the HTML templates, and
 should only need to add new .md files (or possibly modify existing .md files)
 inside either pages/news/ or pages/projects/.
 
-In order to deploy the website to the public-facing server you can type "make
-install".  This requires the correct UNIX permissions to write, which people
-probably don't have.  If you submit a GitHub pull request then I (Palmer) will
-merge the PR and deploy a new version of the website.
+If you are trying to test your modifications to the website, running "make
+view" will show you the generated output.  You shouldn't need to install your
+changes to the public site (I will do that if you submit a PR), but if you want
+to you can do so (though you won't be able to unless you have UNIX permissions)
+by typing "make install".
 
 # Menu generator
 

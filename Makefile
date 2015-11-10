@@ -69,6 +69,10 @@ clean:
 install: all
 	$(RSYNC) -av --delete $(BIN_DIR)/ $(INSTALL_DIR)/
 
+.PHONY: view
+view: all
+	firefox output/index.html
+
 # The additional dependencies that are added to some files, which results in
 # them showing up inside the generated output file.  Note that there's some
 # hackery in here to make sure the ordering is correct everywhere. 
