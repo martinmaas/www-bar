@@ -188,7 +188,7 @@ tools/blogc/build/Makefile: tools/blogc/configure
 tools/blogc/configure: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blogc-*.patch)
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
-	tar -C $(dir $@) -xpf $(filter %.tar.gz,$^) --strip-components=1
+	tar -C $(dir $@) -xzpf $(filter %.tar.gz,$^) --strip-components=1
 	cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
 	chmod +x $@
 	touch $@
