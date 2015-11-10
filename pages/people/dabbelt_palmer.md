@@ -2,6 +2,7 @@ PERMALINK: dabbelt_palmer
 NAME: Palmer Dabbelt
 WEBSITE: http://www.dabbelt.com/~palmer/
 ADVISOR: Krste Asanovic, Jonathan Bachrach, Bora Mikolic
+IMAGE: dabbelt_palmer.jpeg
 PROJECTS: Hurricane, DREAMER
 ------
 As of November 2015, I am a fourth year Ph.D student in [Computer

@@ -125,6 +125,8 @@ to have the following keys defined in order to produce sane output:
 
 * PROJECTS: A comma-seperated list of projects this person is involved in.
 
+* IMAGE: A picture of you.
+
 In addition to these items, a short (paragraph or so) description of each
 person should be provided.  I just copied the first bit from my personal
 website, and linked to that.
