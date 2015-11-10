@@ -199,3 +199,9 @@ clean: clean-blogc
 clean-blogc:
 	rm -rf tools/blogc-$(BLOGC_VERSION).tar.gz
 	rm -rf tools/blogc
+
+# This stuff is fetched from the internet, it should go away.  Blame Eric.
+all: $(BIN_DIR)/images/projects/2015-hurricane.jpeg
+$(BIN_DIR)/images/projects/2015-hurricane.jpeg:
+	mkdir -p $(dir $@)
+	wget http://burgerbeast.com/wp-content/uploads/2014/04/ElRey_FritaCubana.jpg -O $@

@@ -82,6 +82,8 @@ sane output:
 * STATUS: Either "projects" (to put in output/projects.html) or "history" (to
   put in output/history.html).
 
+* IMAGE: Some picture that's relevant to your project.
+
 * PERMALINK: The name of the .md file, used for some linking steps.
 
 Additionally, if you want your project to show up as a submenu entry under

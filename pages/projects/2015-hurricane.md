@@ -1,6 +1,7 @@
 PROJECT: Hurricane
 STATUS: projects
 PERMALINK: 2015-hurricane
+IMAGE: 2015-hurricane.jpeg
 INMENU: Projects
 SUBMENU: Hurricane
 ------
