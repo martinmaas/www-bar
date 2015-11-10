@@ -41,7 +41,7 @@ document.write('<li class="dropdown" id="$id">')
 document.write('  <a href="$PREFIX/$html">$menu$dropdown</a>')
 EOF
 
-    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l | bc)" != "0" ]]
     then
         cat >>$OUTPUT_FILE <<EOF
 document.write('  <ul class="dropdown-menu" role="menu">')
@@ -59,7 +59,7 @@ document.write('    <li><a href="$shtml">$smenu</a></li>')
 EOF
     done
 
-    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l | bc)" != "0" ]]
     then
         cat >>$OUTPUT_FILE <<EOF
 document.write('  </ul>')
