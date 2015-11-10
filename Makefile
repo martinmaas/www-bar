@@ -178,6 +178,14 @@ $(LINK_DIRS):
 	ln -s ../$(notdir $@) $@
 
 # Build tools that don't exist on this machine
+ifeq ($(shell uname),Darwin)
+tools/blogc/build/blogc: tools/blogc/build/blogc.tmp
+	$(CC) $< -o $@ -lm
+
+tools/blogc/build/blogc.tmp: tools/blogc/autogen.sh
+	mkdir -p $(dir $@)
+	find $(dir $<)src -iname "*.c" -type f | xargs $(CC) -shared -fPIC -o $@ -DPACKAGE_STRING=\"blogc-$(BLOGC_VERSION)\"
+else
 tools/blogc/build/blogc: tools/blogc/build/Makefile
 	$(MAKE) -C $(dir $@) $(notdir $@)
 
@@ -187,6 +195,7 @@ tools/blogc/build/Makefile: tools/blogc/configure
 
 tools/blogc/configure: tools/blogc/autogen.sh
 	cd $(dir $@) && ./autogen.sh
+endif
 
 tools/blogc/autogen.sh: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blogc-*.patch)
 	rm -rf $(dir $@)
