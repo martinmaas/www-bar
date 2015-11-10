@@ -62,7 +62,6 @@ EOF
     if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
     then
         cat >>$OUTPUT_FILE <<EOF
-//document.write('  <li><a href="$html">...</a></li>')
 document.write('  </ul>')
 EOF
     fi
