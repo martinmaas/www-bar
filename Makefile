@@ -22,7 +22,7 @@ PEOPLE_DIR ?= $(SRC_DIR)/people
 BLOGC ?= $(shell which blogc 2> /dev/null)
 MENUGEN ?= tools/menugen
 RSYNC ?= $(shell which rsync 2> /dev/null)
-WGET ?= $(shell which wget 2> /dev/null)
+CURL ?= $(shell which curl 2> /dev/null)
 
 ifeq (,$(wildcard $(BLOGC)))
 BLOGC = tools/blogc/build/blogc
@@ -144,19 +144,19 @@ $(BIN_DIR)/favicon.ico: $(IMG_DIR)/favicon.ico
 # Download javascript from the internet
 $(BIN_DIR)/js/jquery.min.js:
 	mkdir -p $(dir $@)
-	$(WGET) http://code.jquery.com/jquery-$(JQUERY_VERSION).min.js -O $@
+	$(CURL) -L http://code.jquery.com/jquery-$(JQUERY_VERSION).min.js > $@
 
 $(BIN_DIR)/js/slick.min.js:
 	mkdir -p $(dir $@)
-	$(WGET) http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/slick.min.js -O $@
+	$(CURL) -L http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/slick.min.js > $@
 
 $(BIN_DIR)/css/slick%:
 	mkdir -p $(dir $@)
-	$(WGET) http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/$(notdir $@) -O $@
+	$(CURL) -L http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/$(notdir $@) > $@
 
 $(BIN_DIR)/fonts/slick%:
 	mkdir -p $(dir $@)
-	$(WGET) http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/fonts/$(notdir $@) -O $@
+	$(CURL) -L http://cdn.jsdelivr.net/jquery.slick/$(SLICK_VERSION)/fonts/$(notdir $@) > $@
 
 # Some things need to be linked around so they can be used in all the subdirs
 LINK_DIRS += $(BIN_DIR)/news/css
@@ -194,7 +194,7 @@ tools/blogc/configure: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blog
 	touch $@
 
 tools/blogc-$(BLOGC_VERSION).tar.gz:
-	$(WGET) https://github.com/blogc/blogc/archive/v$(BLOGC_VERSION).tar.gz -O $@
+	$(CURL) -L https://github.com/blogc/blogc/archive/v$(BLOGC_VERSION).tar.gz > $@
 
 .PHONY: clean-blogc
 clean: clean-blogc
@@ -206,4 +206,4 @@ clean-blogc:
 all: $(BIN_DIR)/images/projects/2015-hurricane.jpeg
 $(BIN_DIR)/images/projects/2015-hurricane.jpeg:
 	mkdir -p $(dir $@)
-	wget http://burgerbeast.com/wp-content/uploads/2014/04/ElRey_FritaCubana.jpg -O $@
+	$(CURL) -L http://burgerbeast.com/wp-content/uploads/2014/04/ElRey_FritaCubana.jpg > $@
