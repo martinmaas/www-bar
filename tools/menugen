@@ -30,7 +30,7 @@ do
     id="$(echo "$markdown" | sed 's@pages/\(.*\).md@\1@')"
 
     dropdown=""
-    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l)" != "0" ]]
+    if [[ "$(grep -l "^INMENU:$menu" $@ | wc -l | bc)" != "0" ]]
     then
         dropdown=" ▾"
     fi
