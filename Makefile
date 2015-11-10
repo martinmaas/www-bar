@@ -185,11 +185,14 @@ tools/blogc/build/Makefile: tools/blogc/configure
 	mkdir -p $(dir $@)
 	cd $(dir $@); ../configure
 
-tools/blogc/configure: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blogc-*.patch)
+tools/blogc/configure: tools/blogc/autogen.sh
+	cd $(dir $@) && ./autogen.sh
+
+tools/blogc/autogen.sh: tools/blogc-$(BLOGC_VERSION).tar.gz $(wildcard tools/blogc-*.patch)
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
 	tar -C $(dir $@) -xzpf $(filter %.tar.gz,$^) --strip-components=1
-	cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
+	#cat $(filter %.patch,$^) | patch -d $(dir $@) -p1 -t
 	chmod +x $@
 	touch $@
 
