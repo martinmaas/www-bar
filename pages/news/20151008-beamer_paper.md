@@ -1,6 +1,6 @@
 TITLE: Scott Beamer Wins Best Paper Award
 POSTDATE: October 8, 2015
-IMAGE: news-20151008-iiswc.png
+IMAGE: 20151008-iiswc.png
 PERMALINK: 20151008-beamer_paper
 BLURB1: 2015 IEEE International Symposium on Workload Characterization
 ------
