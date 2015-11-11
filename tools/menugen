@@ -53,9 +53,10 @@ EOF
         shtml="$(echo "$smarkdown" | sed 's@pages/\(.*\).md@\1.html@')"
         smenu="$(grep "^SUBMENU:" "$smarkdown" | cut -d: -f2)"
         sid="$(echo "$smarkdown" | sed 's@pages/\(.*\).md@\1@')"
+        prefix="$(echo "$PREFIX" | sed 's@.*/@../@g')"
 
 	cat >>$OUTPUT_FILE <<EOF
-document.write('    <li><a href="$shtml">$smenu</a></li>')
+document.write('    <li><a href="$prefix/$shtml">$smenu</a></li>')
 EOF
     done
 
