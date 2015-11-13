@@ -1,7 +1,7 @@
 PERMALINK: dabbelt_palmer
 NAME: Palmer Dabbelt
 WEBSITE: http://www.dabbelt.com/~palmer/
-ADVISOR: Krste Asanovic, Jonathan Bachrach, Bora Mikolic
+ADVISOR: Krste Asanovic, Jonathan Bachrach, Bora Nikolic
 IMAGE: dabbelt_palmer.jpeg
 PROJECTS: Hurricane, DREAMER
 ------
