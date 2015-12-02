@@ -1,4 +1,5 @@
 PROJECT: Rocket Chip Generator
+SHOWPROJECTNAME: false
 STATUS: projects
 PERMALINK: 2014-rocket_chip
 INMENU: Projects
@@ -6,6 +7,8 @@ SUBMENU: Rocket Chip
 ------
 
 <div class="jumbotron">
+
+# Rocket Chip Generator
 
 Rocket Chip is Berkeley's RISC-V based SOC generator.  The [open-source
 release](http://github.com/ucb-bar/rocket-chip/) is capable of generating a

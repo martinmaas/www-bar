@@ -1,4 +1,5 @@
 PROJECT: RISC-V Instruction Set Architecture
+SHOWPROJECTNAME: false
 STATUS: projects
 PERMALINK: 2010-riscv
 INMENU: Projects
@@ -6,6 +7,8 @@ SUBMENU: RISC-V
 ------
 
 <div class="jumbotron">
+
+# RISC-V Instruction Set Architecture
 
 RISC-V is a new free and open instruction set architecture (ISA) developed at
 UC Berkeley, initially designed for research and education, but is now

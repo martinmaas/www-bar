@@ -80,6 +80,10 @@ sane output:
 
 * PROJECT: The name of the project
 
+* SHOWPROJECTNAME: "false" if the project content contains the project name,
+  "true" (or undefinded) if the project should start with the project name.
+  This is a workaround for the "jumbotron" stuff, I need to fix it.
+
 * STATUS: Either "projects" (to put in output/projects.html) or "history" (to
   put in output/history.html).
 

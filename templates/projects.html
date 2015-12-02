@@ -50,7 +50,9 @@
 
     <div class="container theme-showcase" role="main">
       {% block entry %}
+        {% if SHOWPROJECTNAME != "false" %}
         <h1>{{ PROJECT }}</h1>
+	{% endif %}
 	{% ifdef IMAGE %}
 	<img src="images/projects/{{ IMAGE }}"/><br/>
 	{% endif %}
