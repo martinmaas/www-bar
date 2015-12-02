@@ -48,11 +48,19 @@
       </div>
     </div>
 
+    {% block entry %}
+      <div class="jumbotron">
+        <div class="container theme-showcase" role="main">
+          <h1>{{ PROJECT }}</h1>
+          {% ifdef BLURB %}
+            {{ BLURB }}
+          {% endif %}
+	</div>
+      </div>
+    {% endblock %}
+
     <div class="container theme-showcase" role="main">
       {% block entry %}
-        {% if SHOWPROJECTNAME != "false" %}
-        <h1>{{ PROJECT }}</h1>
-	{% endif %}
 	{% ifdef IMAGE %}
 	<img src="images/projects/{{ IMAGE }}"/><br/>
 	{% endif %}
