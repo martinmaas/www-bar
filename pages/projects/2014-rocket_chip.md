@@ -4,6 +4,16 @@ PERMALINK: 2014-rocket_chip
 INMENU: Projects
 SUBMENU: Rocket Chip
 ------
+
+<div class="jumbotron">
+
+Rocket Chip is Berkeley's RISC-V based SOC generator.  The [open-source
+release](http://github.com/ucb-bar/rocket-chip/) is capable of generating a
+multi-core system with Rocket scalar cores, Z-Scale control processors, and a
+coherent memory system.
+
+</div>
+
 [This repository](http://github.com/ucb-bar/rocket-chip) contains the Rocket
 chip generator necessary to instantiate the RISC-V Rocket Core.
 
