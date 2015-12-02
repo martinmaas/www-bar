@@ -49,12 +49,12 @@
     </div>
 
     {% block entry %}
-      <div class="jumbotron2">
+      <div class="jumbotron2" style="margin-bottom: 30px;">
         <div class="container theme-showcase" role="main">
           <h1>{{ PROJECT }}</h1>
           {% ifdef BLURB %}
 	  <div class="blurb" style="font-size: 110%;">
-            {{ BLURB }}
+            <p>{{ BLURB }}</p>
 	  </div>
           {% endif %}
 	</div>
