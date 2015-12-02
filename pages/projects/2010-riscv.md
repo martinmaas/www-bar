@@ -6,7 +6,7 @@ SUBMENU: RISC-V
 BLURB: RISC-V is a new free and open instruction set architecture (ISA) developed at UC Berkeley, initially designed for research and education, but is now increasingly being used for commercial designs.  A full set of software tools for the architecture are also under development and are being prepared for open distribution.  RISC-V was initially developed as part of <a href="http://parlab.eecs.berkeley.edu">Par Lab</a> and is now part of <a href="http://aspire.eecs.berkeley.edu">ASPIRE</a>.
 ------
 
-[This repo](http://github.com/riscv/riscv-tools/) provides guides and references for building the RISC-V software stack::
+[This repo](http://github.com/riscv/riscv-tools/) provides guides and references for building the RISC-V software stack:
 
 1. [Quickstart](#quickstart)
 
