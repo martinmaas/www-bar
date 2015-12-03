@@ -64,7 +64,9 @@
     <div class="container theme-showcase" role="main">
       {% block entry %}
 	{% ifdef IMAGE %}
-	<img src="images/projects/{{ IMAGE }}"/><br/>
+        <center>
+	  <img src="images/projects/{{ IMAGE }}" width="75%"/><br/>
+        </center>
 	{% endif %}
         {{ CONTENT }}
       {% endblock %}
