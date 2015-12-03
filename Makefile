@@ -80,8 +80,8 @@ NEWS = $(shell find $(NEWS_DIR) -iname "*.md" | sort --reverse)
 $(BIN_DIR)/news.html: $(NEWS)
 $(BIN_DIR)/index.html: $(wordlist 1,$(FRONT_NEWS_ENTRIES),$(NEWS))
 
-PROJECTS = $(shell find $(PROJECT_DIR) -iname "*.md" | sort --reverse)
-HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md")
+PROJECTS = $(shell find $(PROJECT_DIR) -iname "*.md" | sort)
+HISTORY = $(shell find $(PROJECT_DIR) -iname "*.md" | sort)
 $(BIN_DIR)/projects.html: $(PROJECTS)
 $(BIN_DIR)/history.html: $(HISTORY)
 
