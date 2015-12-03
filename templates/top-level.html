@@ -170,8 +170,13 @@
     {% block listing %}
       {% if SHOW == STATUS %}
         <div>
-          <a href="projects/{{ PERMALINK }}.html"><h2>{{ PROJECT }}</h2></a>
-          {{ CONTENT }}
+          <a href="projects/{{ PERMALINK }}.html"><h1>{{ PROJECT }}</h1></a>
+          {% ifdef IMAGE %}
+	  <center>
+            <a href="projects/{{ PERMALINK }}.html"><img src="images/projects/{{ IMAGE }}" width="50%"></img></a>
+          </center>
+          {% endif %}
+          <p>{{ BLURB }}</p>
 	</div>
       {% endif %}
     {% endblock %}

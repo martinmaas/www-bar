@@ -1,18 +1,10 @@
 PROJECT: Hurricane
 STATUS: projects
 PERMALINK: 2015-hurricane
-IMAGE: 2015-hurricane.jpeg
 INMENU: Projects
 SUBMENU: Hurricane
+BLURB: The Hurricane project aims to build the next generation of chips coming out of UC Berkeley.  These chips will be focused on power-efficient DSP, with the goal being to beat traditional DSP architectures in energy/op (like TI's TMS320xx67xx series) while maintaining the familiar programming enviornment availiable to traditional CPU-based systems.  Specifically this means booting a full Linux environment, maintaining cache coherence over the entire chip, and supporting existing programming models like OpenCL and pthreads.
 ------
-The Hurricane project aims to build the next generation of chips coming out of
-UC Berkeley.  These chips will be focused on power-efficient DSP, with the goal
-being to beat traditional DSP architectures in energy/op (like TI's
-TMS320xx67xx series) while maintaining the familiar programming enviornment
-availiable to traditional CPU-based systems.  Specifically this means booting a
-full Linux environment, maintaining cache coherence over the entire chip,
-and supporting existing programming models like OpenCL and pthreads.
-
 The Hurricane project builds on existing research efforts from UC Berkeley: it
 executes the RISC-V ISA, uses the Rocket scalar core to run application
 software, and uses the Hwacha vector-fetch accelerator to efficiently compute
