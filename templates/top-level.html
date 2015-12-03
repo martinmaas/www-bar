@@ -52,7 +52,6 @@
       </div>
     </div>
 
-    <div class="container theme-showcase" role="main">
 
     <!-- Shows the front-page image carousel -->
     {% if SHOW == "index" %}
@@ -129,7 +128,22 @@
 
     {% if SHOW == "index" %}
       </div>
+    </div>
     {% endif %}
+
+    <!-- Shows the bulk of the content, which is anything with SHOWON set for
+         this page-->
+    {% block listing %}
+      {% if SHOW == SHOWON %}
+        <div class="jumbotron2">
+	  <div class="container theme-showcase" role="main">
+            {{ CONTENT }}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    <div class="container theme-showcase" role="main">
 
     <!-- If we're meant to show the sponsors, do so -->
     {% block listing %}
@@ -138,17 +152,6 @@
 	  <div class="sponsor-content" style="float: left; width: 75%; overflow: hidden;">
       {% endif %}
     {% endblock %}
-
-    <!-- Shows the bulk of the content, which is anything with SHOWON set for
-         this page-->
-    {% block listing %}
-      {% if SHOW == SHOWON %}
-        <div>
-          {{ CONTENT }}
-        </div>
-      {% endif %}
-    {% endblock %}
-
     <!-- News items, but only when not on index -->
     {% block listing %}
       {% if SHOW != "index" %}
