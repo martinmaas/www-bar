@@ -4,5 +4,6 @@ MENU: Projects
 ------
 # Active Projects
 
-The list of active projects lives here, along with a short blurb about each
-one.
+BAR always has a number of ongoing projects.  The list below contains the
+projects that are currently active.  A list of projects that are no longer
+active can be found on the [history](history.html) page.
