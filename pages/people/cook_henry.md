@@ -1,6 +1,6 @@
 PERMALINK: cook_henry
-NAME: Andrew Waterman
-WEBSITE: http://www.eecs.berkeley.edu/~waterman/
+NAME: Henry Cook
+WEBSITE: http://www.eecs.berkeley.edu/~hcook/
 ADVISOR: Krste Asanovic, David Patterson
 IMAGE: cook_henry.jpeg
 PROJECTS: TileLink, Chisel
