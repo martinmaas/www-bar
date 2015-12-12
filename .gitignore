@@ -2,3 +2,4 @@
 /tools/blogc/
 /tools/blogc-*.tar.gz
 *.swp
+.DS_Store
