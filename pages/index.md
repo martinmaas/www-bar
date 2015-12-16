@@ -14,3 +14,7 @@ Here's what goes at the start of the main page...
 * Get a list of publications
 * Get a list of people, and add sub-menu entries
 * Get someone to write some stuff about the history of UCB-BAR 
+* It seems like the projects should be ordered newest to oldest, instead of vice versa?
+* Probably we should add a page for graduated people as well.
+* Seems odd that some links (e.g., people's names) are blue and others are not.
+* The projects page seems very claustrophobic - can we spread it out a bit?
