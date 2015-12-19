@@ -1,6 +1,5 @@
 TITLE: UCB-BAR: History
 SHOWON: history
-MENU: History
 ------
 # History of Berkeley Architecture Research
 
