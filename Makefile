@@ -16,6 +16,7 @@ IMG_DIR ?= $(SRC_DIR)/images
 PROJECT_DIR ?= $(SRC_DIR)/projects
 PUBS_DIR ?= $(SRC_DIR)/publications
 PEOPLE_DIR ?= $(SRC_DIR)/people
+KEEP_DIR ?= $(SRC_DIR)/keep
 
 # These programs are needed to build the website, if you don't have them then
 # some will be built automatically, some won't.
@@ -58,6 +59,7 @@ ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.png))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.jpeg))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*/*.jpeg))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*/*.png))
+ALL += $(patsubst $(KEEP_DIR)/%,$(BIN_DIR)/keep/%,$(wildcard $(KEEP_DIR)/*))
 all: $(ALL)
 
 # These simple targets won't really ever change
@@ -138,6 +140,10 @@ $(BIN_DIR)/images/%: $(IMG_DIR)/%
 	cp -L $< $@
 
 $(BIN_DIR)/favicon.ico: $(IMG_DIR)/favicon.ico
+	mkdir -p $(dir $@)
+	cp -L $< $@
+
+$(BIN_DIR)/keep/%: $(KEEP_DIR)/%
 	mkdir -p $(dir $@)
 	cp -L $< $@
 
