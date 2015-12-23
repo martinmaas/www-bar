@@ -51,7 +51,18 @@
         </div>
       </div>
     </div>
-
+ 
+    <!-- Shows the bulk of the content, which is anything with SHOWON set for
+         this page-->
+    {% block listing %}
+      {% if SHOW == SHOWON %}
+        <div class="jumbotron2">
+	  <div class="container theme-showcase" role="main">
+            {{ CONTENT }}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
 
     <!-- Shows the front-page image carousel -->
     {% if SHOW == "index" %}
@@ -94,7 +105,8 @@
              1px 1px 0 #000;
 	}
       </style>
-      <div class="slider slick front-news">
+      <div class="jumbotron2">
+        <div class="slider slick front-news">
     {% endif %}
 
     {% block listing %}
@@ -127,21 +139,10 @@
     {% endblock %}
 
     {% if SHOW == "index" %}
+        </div>
       </div>
     </div>
     {% endif %}
-
-    <!-- Shows the bulk of the content, which is anything with SHOWON set for
-         this page-->
-    {% block listing %}
-      {% if SHOW == SHOWON %}
-        <div class="jumbotron2">
-	  <div class="container theme-showcase" role="main">
-            {{ CONTENT }}
-          </div>
-        </div>
-      {% endif %}
-    {% endblock %}
 
     <div class="container theme-showcase" role="main">
 
@@ -152,6 +153,7 @@
 	  <div class="sponsor-content" style="float: left; width: 75%; overflow: hidden;">
       {% endif %}
     {% endblock %}
+
     <!-- News items, but only when not on index -->
     {% block listing %}
       {% if SHOW != "index" %}
@@ -163,6 +165,14 @@
           {{ CONTENT }}
           </div>
         {% endif %}
+      {% endif %}
+    {% endblock %}
+
+    {% block listing %}
+      {% if SHOWON == "index-bottom" %}
+        <div>
+	  {{ CONTENT }}
+	</div>
       {% endif %}
     {% endblock %}
 
