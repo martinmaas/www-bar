@@ -2,8 +2,9 @@ TITLE: Berkeley Architecture Research
 SHOWON: index
 SPONSORS: all
 ------
-Here's what goes at the start of the main page... 
 
-# TODO
-* Get a sponsor list
-* Seed the news entries with something interesting
+# Welcome to the UC Berkeley Architecture Research hompage.
+
+This page is currently under construction, but the [News](news.html),
+[Projects](projects.html), [Publications](publications.html), and
+[People](people.html) pages have content.
