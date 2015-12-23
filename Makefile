@@ -59,7 +59,7 @@ ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.png))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*.jpeg))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*/*.jpeg))
 ALL += $(patsubst $(IMG_DIR)/%,$(BIN_DIR)/images/%,$(wildcard $(IMG_DIR)/*/*.png))
-ALL += $(patsubst $(KEEP_DIR)/%,$(BIN_DIR)/keep/%,$(wildcard $(KEEP_DIR)/*))
+ALL += $(patsubst $(KEEP_DIR)/%,$(BIN_DIR)/keep/%,$(shell find $(KEEP_DIR) -type f))
 all: $(ALL)
 
 # These simple targets won't really ever change
