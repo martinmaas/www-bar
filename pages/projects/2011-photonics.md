@@ -22,3 +22,9 @@ This page archives the programs we run on the EOS22 processor.
 * [shader\_ops.c](http://bar.eecs.berkeley.edu/keep/eos22/shader_ops.c)
 * [shader\_ops.h](http://bar.eecs.berkeley.edu/keep/eos22/shader_ops.h)
 * [teapot.h](http://bar.eecs.berkeley.edu/keep/eos22/teapot.h)
+
+For more information on the software toolchain, please take a look at
+the [RISC-V project
+page](http://bar.eecs.berkeley.edu/projects/2010-riscv.html).  The
+processor RTL has been instantiated from the [Rocket Chip SoC
+Generator](http://bar.eecs.berkeley.edu/projects/2014-rocket_chip.html).
