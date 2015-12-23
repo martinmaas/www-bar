@@ -1,4 +1,4 @@
-TITLE: Berkeley Architecture Research
+FORCETITLE: Berkeley Architecture Research
 SHOWON: index-bottom
 ------
 
