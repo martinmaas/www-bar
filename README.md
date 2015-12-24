@@ -51,10 +51,11 @@ output:
 * POSTDATE: The date the news entry was posted.  This is shown on the carousel,
   the news list, and at the top of the stand-alone news page.
 
-* IMAGE: An image (which must be in pages/images/, but should not have images/
-  prepended to it) that is relevant to this news entry.  This is ONLY shown in
-  the carousel, if you want an image to show up in other places then you have
-  to put it inside the CONTENT section of the news entry.
+* IMAGE: An image (which must be in pages/images/, but should not have
+  images/ prepended to it) that is relevant to this news entry.  This
+  is ONLY shown in the carousel, if you want an image to show up in
+  other places then you have to put it inside the CONTENT section of
+  the news entry.  The image has to be in png format.
 
 * PERMALINK: The file name of this .md file, needed to make some linking steps
   work.
