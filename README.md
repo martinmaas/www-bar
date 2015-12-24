@@ -67,7 +67,7 @@ News entries shouldn't define INMENU/SUBMENU, as it doesn't make sense to have
 the "News" menu have sub-menus.  
 
 # Project/History Entries
-
+PP
 Both project and history entries are defined by a .md file in pages/projects/,
 so to add a new project you create a new file.  Project/history entries are
 sorted alphabetically, so you should follow the convention nof prepending the
