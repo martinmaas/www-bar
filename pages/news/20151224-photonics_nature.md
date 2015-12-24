@@ -1,7 +1,7 @@
 TITLE: Photonics Article Appears in Nature
 POSTDATE: December 24, 2015
 IMAGE: 20151224-Light_Chip21GA.png
-PERMALINK: 20151224-photonics_nature.md
+PERMALINK: 20151224-photonics_nature
 BLURB1: Nature
 ------
 
