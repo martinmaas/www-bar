@@ -1,13 +1,13 @@
-PROJECT: FIRRTL: A Flexible Intermediate Representation for RTL
+PROJECT: FIRRTL
 STATUS: projects
 PERMALINK: 2015-firrtl
 INMENU: Projects
 SUBMENU: FIRRTL
-BLURB: The FIRRTL project is motivated by the success of Chisel [Chisel](https://chisel.eecs.berkeley.edu) and has two parts: 1) a specification of the formalized elaborated graph that the Chisel DSL produces, prior to any simplification, and 2) a library of micro-passes that are used to simplify, transform, or specialize arbitrary FIRRTL graphs.
+BLURB: FIRRTL (A Flexible Intermediate Representation for RTL) is motivated by the success of Chisel and has two parts: 1) a specification of the formalized elaborated graph that the Chisel DSL produces, prior to any simplification, and 2) a library of micro-passes that are used to simplify, transform, or specialize arbitrary FIRRTL graphs.
 
 ------
 
-The ideas for FIRRTL originated from a different UC Berkeley project, Chisel, which embeds a hardware description language in Scala and is used to write highly-parameterized circuit design generators.
+The ideas for FIRRTL originated from a different UC Berkeley project, [Chisel](https://chisel.eecs.berkeley.edu/), which embeds a hardware description language in Scala and is used to write highly-parameterized circuit design generators.
 Users manipulate circuit components using Scala functions, encode their interfaces into custom Scala types, and use Scala's object-orientation to write their own circuit libraries.
 All of these features enabled expressive, reliable and type-safe generators that improved RTL design productivity and robustness.
 
