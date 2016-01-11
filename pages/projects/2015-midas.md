@@ -71,6 +71,6 @@ optimizations, and injecting additional debug and instrumenting logic.
 ## Contributors
 
 - David Biancolin
-- Jack Keonig
+- Jack Koenig
 - Donggyu Kim
 
