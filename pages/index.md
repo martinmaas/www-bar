@@ -21,7 +21,7 @@ These pages are still currently under construction, so stay tuned!
 
 We would like to thank the long list of past and present sponsors who
 have made this work possible, including: DARPA, NSF, DoE, ONR, C-FAR,
-Intel, Huawei, IBM, Google, HP, LGE, Microsoft, National Instruments,
+Intel, Google, HP, Huawei, IBM, LGE, Microsoft, National Instruments,
 NEC, Nokia, NVIDIA, Oracle, Samsung, ST Microelectronics, TSMC, and
 Xilinx.
 
